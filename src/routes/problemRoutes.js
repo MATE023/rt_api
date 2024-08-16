@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const problems = ["problem"];
+const problem = {
+    id: '1',
+    title: 'two sum',
+    email: 'description'
+};
+const problems = [problem];
 
 // Get all users
 router.get('/problems', async (req, res) => {
