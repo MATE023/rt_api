@@ -4,7 +4,7 @@ const router = express.Router();
 const problem = {
     id: '1',
     title: 'two sum',
-    email: 'description'
+    description: 'description'
 };
 const problems = [problem];
 
