@@ -15,6 +15,7 @@ router.get('/problems', async (req, res) => {
 
 router.post('/problems', (req, res) => {
     const problem = req.body;
+    problem.id = (Number(problems[problems.length-1].id)+1).toString();
     problems.push(problem);
     res.status(201).json(problems);
 })
