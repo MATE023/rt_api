@@ -7,8 +7,8 @@ const problem = {
     description: 'description'
 };
 const problems = [problem];
-
-// Get all users
+//problems: id, title, description, url, deifficulty, topics, solutions, createdAt
+// Get all problems
 router.get('/problems', async (req, res) => {
   res.json(problems);
 });
@@ -27,7 +27,7 @@ router.put('/problems/:id', (req, res) => {
     res.json(updatedProblem);
 })
 
-router.delete('/users/:id', (req, res) => {
+router.delete('/problems/:id', (req, res) => {
     const id = req.params.id;
     problems.splice(id, 1);
     res.status(204).send();
