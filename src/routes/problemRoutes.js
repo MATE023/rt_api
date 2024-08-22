@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const problem = {
-    id: '1',
-    title: 'two sum',
-    description: 'description'
-};
-const problems = [problem];
+const p = require('./../entities/Problem');
+const s = require('./../entities/Solution');
+const problems = p.problems;
+const solutions = s.solutions;
+var currSols;
 //problems: id, title, description, url, deifficulty, topics, solutions, createdAt
 // Get all problems
 router.get('/problems', async (req, res) => {
@@ -27,6 +26,31 @@ router.put('/problems/:id', (req, res) => {
     res.json(updatedProblem);
 })
 
+router.get('/problems/:id/solutions', (req, res) => {
+    currSols = [];
+    problems.forEach(prob => {
+        if(prob.id == req.params.id)
+        {
+            prob.solutionIds.forEach(id => {
+                solutions.forEach(sol => {
+                    if (sol.id == id)
+                    {
+                        currSols.push(sol);
+                    }
+                })
+            })
+        }
+    });
+    res.json(currSols);
+})
+/*
+router.get('/problems/:id/soltutions/:id', (req, res) => {
+    const id = req.params.id;
+    const updatedProblem = req.body;
+    problems[id] = updatedProblem;
+    res.json(updatedProblem);
+})
+*/
 router.delete('/problems/:id', (req, res) => {
     const id = req.params.id;
     problems.splice(id, 1);
