@@ -12,6 +12,15 @@ router.get('/problems', async (req, res) => {
   res.json(problems);
 });
 
+router.get('/problems/:id', async (req, res) => {
+    problems.forEach(element => {
+        if(req.params.id == element.id)
+        {
+            res.json(element);
+        }
+    })
+});
+
 router.post('/problems', (req, res) => {
     const problem = req.body;
     problem.id = (Number(problems[problems.length-1].id)+1).toString();
