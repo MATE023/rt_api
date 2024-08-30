@@ -29,6 +29,15 @@ router.get('/solutions/:id/questions', async (req, res) => {
     res.json(currQuestions);
 });
 
+router.get('/solutions/:id', async (req, res) => {
+    solutions.forEach(element => {
+        if(req.params.id == element.id)
+        {
+            res.json(element);
+        }
+    })
+});
+
 router.post('/solutions', (req, res) => {
     const solution = req.body;
     solution.id = (Number(solutions[solutions.length-1].id)+1).toString();
