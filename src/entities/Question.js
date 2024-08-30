@@ -54,5 +54,5 @@ const question8 = {
     correctAnswer: '2'
 }
 
-module.exports.questions = [question1, question2, question3, question4];
+module.exports.questions = [question1, question2, question3, question4, question5, question6, question7, question8];
 module.exports.questions2 = [question5, question6, question7, question8];
