@@ -9,7 +9,7 @@ const solution1 = {
 const solution2 = {
     id: '2',
     problemId: '1',
-    questions: ['1', '2', '3', '4'],
+    questions: ['5', '6', '7', '8'],
     timeComplexity: 'O(n)',
     spaceComplexity: 'O(n)'
 };
