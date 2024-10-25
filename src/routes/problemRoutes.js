@@ -6,19 +6,34 @@ const s = require('./../entities/Solution');
 const problems = p.problems;
 const solutions = s.solutions;
 var currSols;
+
+const problemsDb = require('./../services/rt');
+
 //problems: id, title, description, url, deifficulty, topics, solutions, createdAt
 // Get all problems
 router.get('/problems', async (req, res) => {
-  res.json(problems);
+  //res.json(problems);
+  try {
+    res.json(problemsDb.getAll(req.query.page, "problem").data);
+  } catch(err) {
+    console.error(`Error while getting problems `, err.message);
+    next(err);
+  }
 });
 
 router.get('/problems/:id', async (req, res) => {
-    problems.forEach(element => {
+    /*problems.forEach(element => {
         if(req.params.id == element.id)
         {
             res.json(element);
         }
-    })
+    })*/
+    try {
+        res.json(problemsDb.getSingle(req.query.page, "problem", req.params.id).data);
+        } catch(err) {
+        console.error(`Error while getting problem with id: ${req.params.id}`, err.message);
+        //next(err);
+    }
 });
 
 router.post('/problems', (req, res) => {
@@ -36,21 +51,21 @@ router.put('/problems/:id', (req, res) => {
 })
 
 router.get('/problems/:id/solutions', (req, res) => {
-    currSols = [];
-    problems.forEach(prob => {
-        if(prob.id == req.params.id)
+    /*currSols = [];
+    solutions.forEach(sol => {
+
+        if (sol.problemId == req.params.id)
         {
-            prob.solutionIds.forEach(id => {
-                solutions.forEach(sol => {
-                    if (sol.id == id)
-                    {
-                        currSols.push(sol);
-                    }
-                })
-            })
-        }
+            currSols.push(sol);
+        } 
     });
-    res.json(currSols);
+    res.json(currSols);*/
+    try {
+        res.json(problemsDb.getMultiple(req.query.page, `SELECT * FROM solution WHERE problem_id = ${req.params.id}`).data);
+        } catch(err) {
+        console.error(`Error while getting solutions for problem with id: ${req.params.id}`, err.message);
+        //next(err);
+    }
 })
 /*
 router.get('/problems/:id/soltutions/:id', (req, res) => {
