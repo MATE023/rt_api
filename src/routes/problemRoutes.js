@@ -14,7 +14,7 @@ const problemsDb = require('./../services/rt');
 router.get('/problems', async (req, res) => {
   //res.json(problems);
   try {
-    res.json(problemsDb.getAll(req.query.page, "problem"));
+    res.json(problemsDb.getAll(req.query.page, "problem").data);
   } catch(err) {
     console.error(`Error while getting problems `, err.message);
     next(err);
@@ -29,7 +29,7 @@ router.get('/problems/:id', async (req, res) => {
         }
     })*/
     try {
-        res.json(problemsDb.getSingle(req.query.page, "problem", req.params.id));
+        res.json(problemsDb.getSingle(req.query.page, "problem", req.params.id).data);
         } catch(err) {
         console.error(`Error while getting problem with id: ${req.params.id}`, err.message);
         //next(err);
@@ -61,7 +61,7 @@ router.get('/problems/:id/solutions', (req, res) => {
     });
     res.json(currSols);*/
     try {
-        res.json(problemsDb.getMultiple(req.query.page, `SELECT * FROM solution WHERE problem_id = ${req.params.id}`));
+        res.json(problemsDb.getMultiple(req.query.page, `SELECT * FROM solution WHERE problem_id = ${req.params.id}`).data);
         } catch(err) {
         console.error(`Error while getting solutions for problem with id: ${req.params.id}`, err.message);
         //next(err);
