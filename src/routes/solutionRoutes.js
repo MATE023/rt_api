@@ -5,37 +5,51 @@ const s = require('./../entities/Solution');
 const q = require('./../entities/Question');
 const solutions = s.solutions;
 const questions = q.questions;
+
+const solutionsDb = require('./../services/rt');
 //solutions: id, questions, timeComplexity, spaceComplexity
 // Get all solutions
 router.get('/solutions', async (req, res) => {
-  res.json(solutions);
+  //res.json(solutions);
+  try {
+    res.json(solutionsDb.getAll(req.query.page, "solution"));
+  } catch(err) {
+    console.error(`Error while getting solutions `, err.message);
+    next(err);
+  }
 });
 
 router.get('/solutions/:id/questions', async (req, res) => {
-    currQuestions = [];
-    solutions.forEach(sol => {
-        if(sol.id == req.params.id)
+    /*currQuestions = [];
+    questions.forEach(qu => {
+        if(qu.solutionId == req.params.id)
         {
-            sol.questionIds.forEach(id => {
-                questions.forEach(ques => {
-                    if (ques.id == id)
-                    {
-                        currQuestions.push(ques);
-                    }
-                })
-            })
+           currQuestions.push(qu);
         }
     });
     res.json(currQuestions);
+    */
+    try {
+        res.json(solutionsDb.getMultiple(req.query.page, `SELECT * FROM question WHERE solution_id = ${req.params.id}`));
+        } catch(err) {
+        console.error(`Error while getting questions for solution with id: ${req.params.id}`, err.message);
+        //next(err);
+    }
 });
 
 router.get('/solutions/:id', async (req, res) => {
-    solutions.forEach(element => {
+    /*solutions.forEach(element => {
         if(req.params.id == element.id)
         {
             res.json(element);
         }
-    })
+    })*/
+    try {
+        res.json(solutionsDb.getSingle(req.query.page, "solution", req.params.id));
+        } catch(err) {
+        console.error(`Error while getting solution with id: ${req.params.id}`, err.message);
+        //next(err);
+    }
 });
 
 router.post('/solutions', (req, res) => {
