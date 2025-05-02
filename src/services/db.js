@@ -1,11 +1,21 @@
-const sqlite = require('better-sqlite3');
-const path = require('path');
-const db = new sqlite(path.resolve('rt.db'), {fileMustExist: true});
+/*import mysql from 'mysql2/promise';
+import dotenv from 'dotenv'
+dotenv.config;
 
-function query(sql, params) {
-  return db.prepare(sql).all(params);
-}
+const connection = async () => {
+  try {
+    const db = await mysql.createConnection({
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE
+    });
+    console.log('DB connected');
+    return db;
+  } catch (error) {
+    console.log('Error connecting db')
+    throw error;
+  }
+};
 
-module.exports = {
-  query
-}
+export default connection;*/
