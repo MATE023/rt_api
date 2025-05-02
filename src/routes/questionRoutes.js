@@ -7,7 +7,7 @@ const solutions = s.solutions;
 const questions = q.questions;
 
 
-router.get('/questions/:id/solutions', async (req, res) => {
+router.get('/questions/solutions/:id', async (req, res) => {
     const id = req.params.id;
     currQuestions = [];
     questions.forEach(q => {
