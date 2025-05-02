@@ -3,8 +3,11 @@ const router = express.Router();
 
 const s = require('./../entities/Solution');
 const q = require('./../entities/Question');
+const p = require('./../entities/Problem')
 const solutions = s.solutions;
 const questions = q.questions;
+const problems = p.problems;
+
 //solutions: id, questions, timeComplexity, spaceComplexity
 // Get all solutions
 router.get('/solutions', async (req, res) => {
@@ -36,6 +39,16 @@ router.get('/solutions/:id', async (req, res) => {
             res.json(element);
         }
     })
+});
+
+router.get('/solutions/problems/:id', async (req, res) => {
+    currSolutions = [];
+    solutions.forEach(sol => {
+        if (sol.problemId == id) {
+            currSolutions.push(sol);
+        }
+    });
+    res.json(currSolutions);
 });
 
 router.post('/solutions', (req, res) => {
