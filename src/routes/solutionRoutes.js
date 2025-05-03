@@ -44,7 +44,7 @@ router.get('/solutions/:id', async (req, res) => {
 router.get('/solutions/problems/:id', async (req, res) => {
     currSolutions = [];
     solutions.forEach(sol => {
-        if (sol.problemId == id) {
+        if (sol.problemId == req.params.id) {
             currSolutions.push(sol);
         }
     });
