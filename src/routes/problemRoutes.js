@@ -35,23 +35,6 @@ router.put('/problems/:id', (req, res) => {
     res.json(updatedProblem);
 })
 
-router.get('/problems/:id/solutions', (req, res) => {
-    currSols = [];
-    problems.forEach(prob => {
-        if(prob.id == req.params.id)
-        {
-            prob.solutionIds.forEach(id => {
-                solutions.forEach(sol => {
-                    if (sol.id == id)
-                    {
-                        currSols.push(sol);
-                    }
-                })
-            })
-        }
-    });
-    res.json(currSols);
-})
 /*
 router.get('/problems/:id/soltutions/:id', (req, res) => {
     const id = req.params.id;
